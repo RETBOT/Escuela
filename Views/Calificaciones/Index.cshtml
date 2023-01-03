@@ -4,33 +4,33 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Calificaciones</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary btn-lg active" asp-action="Create">Agregar nueva</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="thead-dark">
         <tr>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Unidad1)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Unidad2)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Unidad3)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.CaliFinal)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.NombreMateriaNavigation)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.NumControlNavigation)
             </th>
-            <th></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -55,9 +55,9 @@
                 @Html.DisplayFor(modelItem => item.NumControlNavigation.NumControl)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdCalificacion">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdCalificacion">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdCalificacion">Delete</a>
+                <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.IdCalificacion">Editar</a> |
+                <a asp-action="Details" class="btn btn-secondary" asp-route-id="@item.IdCalificacion">Detalles</a> |
+                <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.IdCalificacion">Eliminar</a>
             </td>
         </tr>
 }

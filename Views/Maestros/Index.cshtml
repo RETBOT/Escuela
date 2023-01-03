@@ -4,30 +4,30 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Maestros</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary btn-lg active" asp-action="Create">Agregar nuevo</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="thead-dark">
         <tr>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Apellidos)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.NumTelefono)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Correo)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.NombreMateriaNavigation)
             </th>
-            <th></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -49,9 +49,9 @@
                 @Html.DisplayFor(modelItem => item.NombreMateriaNavigation.NombreMateria)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdMaestro">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdMaestro">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdMaestro">Delete</a>
+                <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.IdMaestro">Editar</a> |
+                <a asp-action="Details" class="btn btn-secondary" asp-route-id="@item.IdMaestro">Detalles</a> |
+                <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.IdMaestro">Eliminar</a>
             </td>
         </tr>
 }
