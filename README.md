@@ -1,7 +1,6 @@
-# Escuela proyecto ASP.NET Core MVC C♯
-## Proyecto ASP.NET WEB MVC
+# Escuela - proyecto ASP.NET Core MVC C♯
 ## Configuración inicial
-Iniciaremos creando un nuevo proyecto en [Visual Studio 2022](https://visualstudio.microsoft.com/es/vs/). 
+Iniciaremos creando un nuevo proyecto en :man_technologist: [Visual Studio 2022](https://visualstudio.microsoft.com/es/vs/).  
 ![img1](/ASP.NET/imgs/1.png)
 
 Después en el filtro, pondremos web y buscaremos <<Aplicación web de ASP.NET Core (MVC)>> y daremos siguiente
