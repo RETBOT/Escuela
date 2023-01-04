@@ -28,12 +28,14 @@ Seleccionaremos Microsoft.EntityFrameworkCore.SqlServer y le daremos instalar.
 ![img8](/ASP.NET/imgs/8.png)
 
 Aceptamos los términos y condiciones
+
 ![img9](/ASP.NET/imgs/9.png)
 
 Y después instalaremos Microsoft.EntityFrameworkCore.Tools
 ![img10](/ASP.NET/imgs/10.png)
 
 Aceptamos los términos y condiciones
+
 ![img11](/ASP.NET/imgs/11.png)
 
 y aparecerá aprobado :white_check_mark:
