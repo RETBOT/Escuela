@@ -181,3 +181,85 @@ values
 (7, 8, 8, 7.66, 'DESARROLLO WEB PILA COMPLETA II', '19130501'),
 (9, 8, 9, 8.66, 'ADMINISTRACIÓN DE REDES', '19130501')
 ```
+
+## Conectar SQL con ASP.NET
+Dentro del proyecto buscamos Herramientas->Administrador de paquetes NuGet->Consola del Administrador de paquetes.
+![img13](/ASP.NET/imgs/13.png)
+
+Desplegara la terminal en el proyecto y escribiremos lo siguiente: 
+```
+Scaffold-DbContext "server=localhost; database=Preparatoria; integrated security=true; Encrypt=False" Microsoft.EntityFrameworkCore.SqlServer -OutPutDir Models 
+```
+![img14](/ASP.NET/imgs/14.png)
+
+La alerta indica que debemos de tener una cadena de conexión mas segura en el proyecto, por ende, entraremos a la siguiente [pagina](https://learn.microsoft.com/es-mx/ef/core/miscellaneous/connection-strings) en la cual buscaremos un ejemplo de cadenas de conexión.
+
+
+Copiamos el siguiente fragmento de código: 
+```
+{
+  "ConnectionStrings": {
+    "BloggingDatabase": "Server=(localdb)\\mssqllocaldb;Database=EFGetStarted.ConsoleApp.NewDb;Trusted_Connection=True;"
+  },
+}
+```
+![img15](/ASP.NET/imgs/15.png)
+
+Y lo vamos a pegar en el archivo appsettings.json
+![img16](/ASP.NET/imgs/16.png)
+
+Dentro de los modelos, en el archivo EscuelaContext.cs buscamos el método llamado OnConfiguring el cual contiene la cadena de conexión:
+```
+server=localhost; database=Escuela; integrated security=true; Encrypt=False 
+```
+![img17](/ASP.NET/imgs/17.png)
+
+Y lo pegaremos en el archivo appsettings.json
+```
+"ConnectionStrings": {
+    "conexion": "server=localhost; database=Escuela; integrated security=true; Encrypt=False"
+  }
+```
+![img18](/ASP.NET/imgs/18.png)
+
+Y comentamos lo siguiente dentro de Models->EscuelaContext.cs:
+![img19](/ASP.NET/imgs/19.png)
+
+Después entramos nuevamente a la [pagina](https://learn.microsoft.com/es-mx/ef/core/miscellaneous/connection-strings) Y copiamos lo siguiente: 
+```
+    services.AddDbContext<BloggingContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase")));
+```
+![img20](/ASP.NET/imgs/20.png)
+
+Después entramos en el archivo Program.cs y pegamos lo copiado 
+![img21](/ASP.NET/imgs/21.png)
+
+Y cambiamos lo siguiente: 
+```
+builder.Services.AddDbContext<EscuelaContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("conexion")));
+```
+![img22](/ASP.NET/imgs/22.png)
+
+## Controladores para el CRUD 
+Una vez ya configurado el proyecto, procedemos con el CRUD
+
+Iniciaremos agregando los controladores 
+Daremos clic derecho sobre la carpeta Controllers, después seleccionaremos agregar y controlador…
+![img23](/ASP.NET/imgs/23.png)
+
+Después seleccionaremos Controlador de MVC
+![img24](/ASP.NET/imgs/24.png)
+
+Se desplegará la siguiente ventana 
+![img25](/ASP.NET/imgs/25.png)
+
+ Y seleccionamos el modelo (tabla), el contexto (base de datos) y el nombre que tendrá el controlador. 
+ ![img26](/ASP.NET/imgs/26.png)
+
+Esto se aplicará para cada tabla.
+ ![img27](/ASP.NET/imgs/27.png)
+
+## Vistas
+ Ahora solo queda modificar las vistas de la pagina a nuestro gusto 
