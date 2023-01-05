@@ -265,71 +265,22 @@ Esto se aplicará para cada tabla.
 
 ## Vistas
  Ahora solo queda modificar las vistas de la pagina a nuestro gusto 
- Pagina de inicio => [_layout.cshtml](/Views/Shared/_Layout.cshtml)
+### Inicio
+ Pagina de inicio => [Index.cshtml](/Views/Home/Index.cshtml)
   ![inicio](/ASP.NET/imgs/inicio.png)
 
 ```
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Escuela</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Escuela.styles.css" asp-append-version="true" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Escuela</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Alumnos" asp-action="Index">Alumnos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Calificaciones" asp-action="Index">Calificaciones</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Maestros" asp-action="Index">Maestros</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Materias" asp-action="Index">Materias</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+@{
+    ViewData["Title"] = "Home Page";
+}
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Escuela - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
+<div class="text-center">
+    <h1 class="display-4">Escuela</h1>
+    
+</div>
 ```
 
-
+### Alumnos 
  Pagina de Alumnos => [Index.cshtml](/Views/Alumnos/Index.cshtml)
   ![Alumnos](/ASP.NET/imgs/alumnos.png)
 
@@ -730,6 +681,791 @@ Esto se aplicará para cada tabla.
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdAlumno" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index">Regresar</a>
+    </form>
+</div>
+```
+
+### Calificaciones 
+Pagina de Calificaciones => [Index.cshtml](/Views/Calificaciones/Index.cshtml)
+![Calificaciones](/ASP.NET/imgs/calificaciones.png)
+
+```
+@model IEnumerable<Escuela.Models.Calificacione>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Calificaciones</h1>
+
+<p>
+    <a class="btn btn-primary btn-lg active" asp-action="Create">Agregar nueva</a>
+</p>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Unidad1)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Unidad2)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Unidad3)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.CaliFinal)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.NombreMateriaNavigation)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.NumControlNavigation)
+            </th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unidad1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unidad2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unidad3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CaliFinal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreMateriaNavigation.NombreMateria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumControlNavigation.NumControl)
+            </td>
+            <td>
+                <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.IdCalificacion">Editar</a> |
+                <a asp-action="Details" class="btn btn-secondary" asp-route-id="@item.IdCalificacion">Detalles</a> |
+                <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.IdCalificacion">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+```
+
+ Pagina de Calificaciones Agregar => [Create.cshtml](/Views/Calificaciones/Create.cshtml)
+
+```
+@model Escuela.Models.Calificacione
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Agregar</h1>
+
+<h4>Calificacione</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Unidad1" class="control-label"></label>
+                <input asp-for="Unidad1" class="form-control" />
+                <span asp-validation-for="Unidad1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Unidad2" class="control-label"></label>
+                <input asp-for="Unidad2" class="form-control" />
+                <span asp-validation-for="Unidad2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Unidad3" class="control-label"></label>
+                <input asp-for="Unidad3" class="form-control" />
+                <span asp-validation-for="Unidad3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CaliFinal" class="control-label"></label>
+                <input asp-for="CaliFinal" class="form-control" />
+                <span asp-validation-for="CaliFinal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreMateria" class="control-label"></label>
+                <select asp-for="NombreMateria" class ="form-control" asp-items="ViewBag.NombreMateria"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumControl" class="control-label"></label>
+                <select asp-for="NumControl" class ="form-control" asp-items="ViewBag.NumControl"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+```
+
+ Pagina de Calificaciones Detalles => [Details.cshtml](/Views/Calificaciones/Details.cshtml)
+
+```
+@model Escuela.Models.Calificacione
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Calificacione</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Unidad1)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Unidad1)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Unidad2)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Unidad2)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Unidad3)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Unidad3)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CaliFinal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CaliFinal)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreMateriaNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombreMateriaNavigation.NombreMateria)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumControlNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumControlNavigation.NumControl)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdCalificacion">Editar</a> |
+    <a asp-action="Index">Regresar</a>
+</div>
+```
+
+ Pagina de Calificaciones Editar => [Edit.cshtml](/Views/Calificaciones/Edit.cshtml)
+
+```
+@model Escuela.Models.Calificacione
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>Calificacione</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdCalificacion" />
+            <div class="form-group">
+                <label asp-for="Unidad1" class="control-label"></label>
+                <input asp-for="Unidad1" class="form-control" />
+                <span asp-validation-for="Unidad1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Unidad2" class="control-label"></label>
+                <input asp-for="Unidad2" class="form-control" />
+                <span asp-validation-for="Unidad2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Unidad3" class="control-label"></label>
+                <input asp-for="Unidad3" class="form-control" />
+                <span asp-validation-for="Unidad3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CaliFinal" class="control-label"></label>
+                <input asp-for="CaliFinal" class="form-control" />
+                <span asp-validation-for="CaliFinal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreMateria" class="control-label"></label>
+                <select asp-for="NombreMateria" class="form-control" asp-items="ViewBag.NombreMateria"></select>
+                <span asp-validation-for="NombreMateria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumControl" class="control-label"></label>
+                <select asp-for="NumControl" class="form-control" asp-items="ViewBag.NumControl"></select>
+                <span asp-validation-for="NumControl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+```
+
+ Pagina de Calificaciones Eliminar => [Delete.cshtml](/Views/Calificaciones/Delete.cshtml)
+
+```
+@model Escuela.Models.Calificacione
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Eliminar</h1>
+
+<h3>¿Estás seguro de que quieres eliminar esto?</h3>
+<div>
+    <h4>Calificacione</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Unidad1)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Unidad1)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Unidad2)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Unidad2)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Unidad3)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Unidad3)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CaliFinal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CaliFinal)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreMateriaNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombreMateriaNavigation.NombreMateria)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumControlNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumControlNavigation.NumControl)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdCalificacion" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index">Regresar</a>
+    </form>
+</div>
+```
+
+### Maestros
+Pagina de Maestros => [Index.cshtml](/Views/Maestros/Index.cshtml)
+![Maestros](/ASP.NET/imgs/maestros.png)
+
+```
+@model IEnumerable<Escuela.Models.Maestro>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Maestros</h1>
+
+<p>
+    <a class="btn btn-primary btn-lg active" asp-action="Create">Agregar nuevo</a>
+</p>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Apellidos)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.NumTelefono)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Correo)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.NombreMateriaNavigation)
+            </th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumTelefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Correo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreMateriaNavigation.NombreMateria)
+            </td>
+            <td>
+                <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.IdMaestro">Editar</a> |
+                <a asp-action="Details" class="btn btn-secondary" asp-route-id="@item.IdMaestro">Detalles</a> |
+                <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.IdMaestro">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+```
+
+ Pagina de Maestros Agregar => [Create.cshtml](/Views/Maestros/Create.cshtml)
+
+```
+@model Escuela.Models.Maestro
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Agregar</h1>
+
+<h4>Maestro</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellidos" class="control-label"></label>
+                <input asp-for="Apellidos" class="form-control" />
+                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumTelefono" class="control-label"></label>
+                <input asp-for="NumTelefono" class="form-control" />
+                <span asp-validation-for="NumTelefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Correo" class="control-label"></label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreMateria" class="control-label"></label>
+                <select asp-for="NombreMateria" class ="form-control" asp-items="ViewBag.NombreMateria"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+```
+
+ Pagina de Maestros Detalles => [Details.cshtml](/Views/Maestros/Details.cshtml)
+
+```
+@model Escuela.Models.Maestro
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Maestro</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Apellidos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Apellidos)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumTelefono)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumTelefono)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Correo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Correo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreMateriaNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombreMateriaNavigation.NombreMateria)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdMaestro">Editar</a> |
+    <a asp-action="Index">Regresar</a>
+</div>
+```
+
+ Pagina de Maestros Editar => [Edit.cshtml](/Views/Maestros/Edit.cshtml)
+
+```
+@model Escuela.Models.Maestro
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>Maestro</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdMaestro" />
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellidos" class="control-label"></label>
+                <input asp-for="Apellidos" class="form-control" />
+                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumTelefono" class="control-label"></label>
+                <input asp-for="NumTelefono" class="form-control" />
+                <span asp-validation-for="NumTelefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Correo" class="control-label"></label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreMateria" class="control-label"></label>
+                <select asp-for="NombreMateria" class="form-control" asp-items="ViewBag.NombreMateria"></select>
+                <span asp-validation-for="NombreMateria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+```
+
+ Pagina de Maestros Eliminar => [Delete.cshtml](/Views/Maestros/Delete.cshtml)
+
+```
+@model Escuela.Models.Maestro
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Eliminar</h1>
+
+<h3>¿Estás seguro de que quieres eliminar esto?</h3>
+<div>
+    <h4>Maestro</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Apellidos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Apellidos)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumTelefono)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumTelefono)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Correo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Correo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreMateriaNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombreMateriaNavigation.NombreMateria)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdMaestro" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index">Regresar</a>
+    </form>
+</div>
+```
+
+### Materias 
+Pagina de Materias => [Index.cshtml](/Views/--/Index.cshtml)
+![Materias](/ASP.NET/imgs/materias.png)
+```
+@model IEnumerable<Escuela.Models.Materia>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Materias</h1>
+
+<p>
+    <a class="btn btn-primary btn-lg active" asp-action="Create">Agregar nueva</a>
+</p>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.NombreMateria)
+            </th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreMateria)
+            </td>
+            <td>
+                <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.IdMateria">Editar</a> |
+                <a asp-action="Details" class="btn btn-secondary" asp-route-id="@item.IdMateria">Detalles</a> |
+                <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.IdMateria">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+```
+
+ Pagina de Materias Agregar => [Create.cshtml](/Views/Materias/Create.cshtml)
+
+```
+@model Escuela.Models.Materia
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Agregar</h1>
+
+<h4>Materia</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NombreMateria" class="control-label"></label>
+                <input asp-for="NombreMateria" class="form-control" />
+                <span asp-validation-for="NombreMateria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+```
+
+ Pagina de Materias Detalles => [Details.cshtml](/Views/Materias/Details.cshtml)
+```
+@model Escuela.Models.Materia
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Materia</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreMateria)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombreMateria)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdMateria">Editar</a> |
+    <a asp-action="Index">Regresar</a>
+</div>
+```
+
+ Pagina de Materias Editar => [Edit.cshtml](/Views/Materias/Edit.cshtml)
+```
+@model Escuela.Models.Materia
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>Materia</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdMateria" />
+            <div class="form-group">
+                <label asp-for="NombreMateria" class="control-label"></label>
+                <input asp-for="NombreMateria" class="form-control" />
+                <span asp-validation-for="NombreMateria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+```
+
+ Pagina de Materias Eliminar => [Delete.cshtml](/Views/Materias/Delete.cshtml)
+```
+@model Escuela.Models.Materia
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Eliminar</h1>
+
+<h3>¿Estás seguro de que quieres eliminar esto?</h3>
+<div>
+    <h4>Materia</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreMateria)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombreMateria)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdMateria" />
         <input type="submit" value="Eliminar" class="btn btn-danger" /> |
         <a asp-action="Index">Regresar</a>
     </form>
