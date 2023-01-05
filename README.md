@@ -328,3 +328,93 @@ Esto se aplicará para cada tabla.
 </body>
 </html>
 ```
+
+
+ Pagina de Alumnos => [Index.cshtml](/Views/Alumnos/Index.cshtml)
+  ![Alumnos](/ASP.NET/imgs/alumnos.png)
+
+```
+@model IEnumerable<Escuela.Models.Alumno>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Alumnos</h1>
+
+<p>
+    <a class="btn btn-primary btn-lg active" asp-action="Create">Agregar nuevo</a>
+</p>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.NumControl)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Apellidos)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.PromedioGrals)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.NombreMateria1Navigation)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.NombreMateria2Navigation)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.NombreMateria3Navigation)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.NombreMateria4Navigation)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.NombreMateria5Navigation)
+            </th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumControl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PromedioGrals)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreMateria1Navigation.NombreMateria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreMateria2Navigation.NombreMateria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreMateria3Navigation.NombreMateria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreMateria4Navigation.NombreMateria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreMateria5Navigation.NombreMateria)
+            </td>
+            <td>
+                <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.IdAlumno">Editar</a> |
+                <a asp-action="Details" class="btn btn-secondary" asp-route-id="@item.IdAlumno">Detalles</a> |
+                <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.IdAlumno">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+```
