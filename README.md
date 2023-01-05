@@ -493,3 +493,82 @@ Esto se aplicará para cada tabla.
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 ```
+
+
+ Pagina de Alumnos Detalles => [Details.cshtml](/Views/Alumnos/Details.cshtml)
+  ![Alumnos](/ASP.NET/imgs/alumnos%20detalle.png)
+
+```
+@model Escuela.Models.Alumno
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Alumno</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumControl)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumControl)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Apellidos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Apellidos)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PromedioGrals)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PromedioGrals)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreMateria1Navigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombreMateria1Navigation.NombreMateria)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreMateria2Navigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombreMateria2Navigation.NombreMateria)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreMateria3Navigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombreMateria3Navigation.NombreMateria)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreMateria4Navigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombreMateria4Navigation.NombreMateria)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NombreMateria5Navigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombreMateria5Navigation.NombreMateria)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.IdAlumno">Editar</a> |
+    <a asp-action="Index">Regresar</a>
+</div>
+```
