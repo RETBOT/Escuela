@@ -1,4 +1,5 @@
 # Escuela :school: - proyecto ASP.NET Core MVC C♯ :man_technologist:
+[Descargar en pdf](/ASP.NET/archivos/Escuela%20-%20proyecto%20ASP.NET%20Core%20MVC%20C♯.pdf)
 ## Configuración inicial
 Iniciaremos creando un nuevo proyecto en [Visual Studio 2022](https://visualstudio.microsoft.com/es/vs/).  
 ![img1](/ASP.NET/imgs/1.png)
