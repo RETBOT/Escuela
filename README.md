@@ -572,3 +572,84 @@ Esto se aplicará para cada tabla.
     <a asp-action="Index">Regresar</a>
 </div>
 ```
+
+
+ Pagina de Alumnos Editar => [Edit.cshtml](/Views/Alumnos/Edit.cshtml)
+  ![Alumnos](/ASP.NET/imgs/alumnos%20editar.png)
+
+```
+@model Escuela.Models.Alumno
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>Alumno</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdAlumno" />
+            <div class="form-group">
+                <label asp-for="NumControl" class="control-label"></label>
+                <input asp-for="NumControl" class="form-control" />
+                <span asp-validation-for="NumControl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellidos" class="control-label"></label>
+                <input asp-for="Apellidos" class="form-control" />
+                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PromedioGrals" class="control-label"></label>
+                <input asp-for="PromedioGrals" class="form-control" />
+                <span asp-validation-for="PromedioGrals" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreMateria1" class="control-label"></label>
+                <select asp-for="NombreMateria1" class="form-control" asp-items="ViewBag.NombreMateria1"></select>
+                <span asp-validation-for="NombreMateria1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreMateria2" class="control-label"></label>
+                <select asp-for="NombreMateria2" class="form-control" asp-items="ViewBag.NombreMateria2"></select>
+                <span asp-validation-for="NombreMateria2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreMateria3" class="control-label"></label>
+                <select asp-for="NombreMateria3" class="form-control" asp-items="ViewBag.NombreMateria3"></select>
+                <span asp-validation-for="NombreMateria3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreMateria4" class="control-label"></label>
+                <select asp-for="NombreMateria4" class="form-control" asp-items="ViewBag.NombreMateria4"></select>
+                <span asp-validation-for="NombreMateria4" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreMateria5" class="control-label"></label>
+                <select asp-for="NombreMateria5" class="form-control" asp-items="ViewBag.NombreMateria5"></select>
+                <span asp-validation-for="NombreMateria5" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+```
