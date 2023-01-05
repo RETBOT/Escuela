@@ -259,6 +259,8 @@ Se desplegará la siguiente ventana
  ![img26](/ASP.NET/imgs/26.png)
 
 Esto se aplicará para cada tabla.
+
+
  ![img27](/ASP.NET/imgs/27.png)
 
 ## Vistas
